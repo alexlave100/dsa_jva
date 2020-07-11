@@ -1,10 +1,14 @@
 package com.dsa.datastructures;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class CustomStack {
-  
+
+  private final List<Character> left  = Arrays.asList('(', '{', '[', '<');
+  private final List<Character> right = Arrays.asList(')', '}', ']', '>');
+
   Stack<Character>stack = new Stack<>();
 
   public CustomStack(){}
@@ -25,9 +29,19 @@ public class CustomStack {
   }
   
   public Boolean isBalanced(String s) {
-    for (Character c : s.toCharArray()) {
+    if (s.isEmpty())
+      throw new IllegalArgumentException("Empty string");
 
+    for (Character c : s.toCharArray()) {
+      if (left.contains(c))
+        stack.push(c);
+      if (right.contains(c)) {
+        if (stack.empty() || right.indexOf(c) != left.indexOf(stack.pop()))
+          return false;
+      }
     }
-    return false;
+
+    return stack.empty();
   }
+  
 }
