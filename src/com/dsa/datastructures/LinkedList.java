@@ -1,15 +1,20 @@
 package com.dsa.datastructures;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.NoSuchElementException;
+import java.util.Queue;
+
+import com.dsa.aux.Pair;
 
 public class LinkedList {
 
   //Nested Node class
   private class Node {   
-    private int value;
+    private final int value;
     private Node next;
 
-    private Node(int value){
+    private Node(final int value){
       this.value = value;
     }
   }
@@ -17,14 +22,15 @@ public class LinkedList {
   private Node first;
   private Node last;
   private int indexSize;
+  Queue<Integer> q = new ArrayDeque<>();
 
   public LinkedList() {
     this.indexSize = 0;
   }
 
   //addFirst
-  public void addFirst(int value) {
-    Node n = new Node(value);
+  public void addFirst(final int value) {
+    final Node n = new Node(value);
     if(isEmpty())
       first = last = n;
     else {
@@ -35,8 +41,8 @@ public class LinkedList {
   }
 
   //addLast
-  public void addLast(int value) {
-    Node n = new Node(value);
+  public void addLast(final int value) {
+    final Node n = new Node(value);
     if(isEmpty())
       first = last = n;
     else {
@@ -57,7 +63,7 @@ public class LinkedList {
     else if (onlyOneNodeInList())
       first = last = null;
     else {
-      Node current = first.next;
+      final Node current = first.next;
       first.next = null;
       first = current;
     }
@@ -71,14 +77,14 @@ public class LinkedList {
     if (onlyOneNodeInList())
       first = last = null;
     else {
-      Node current = getPrevious();
+      final Node current = getPrevious();
       last = current;
       last.next = null;
     }
     indexSize--;
   }
 
-  public void deleteAt(int index) {
+  public void deleteAt(final int index) {
     if (index < 0 || index > indexSize) 
       return;
     if (index == 0) {
@@ -106,7 +112,7 @@ public class LinkedList {
   }
   
   public int[] toArray() {
-    int[] array = new int[indexSize];
+    final int[] array = new int[indexSize];
     Node current = first;
     int index = 0;
     while (current != null) {
@@ -117,13 +123,13 @@ public class LinkedList {
   }
 
   //contains
-  public Boolean contains(int value) {
+  public Boolean contains(final int value) {
     return indexOf(value) != -1;
   }
 
-  public void deleteNodeAtIndex(int index) { 
-    Node previous = first, 
-         current = first.next; 
+  public void deleteNodeAtIndex(final int index) { 
+    Node previous = first,
+         current = first.next;
    for (int i = 1; i < index; i++) {
       previous = current;
       current = current.next;
@@ -134,7 +140,7 @@ public class LinkedList {
 }
 
   //indexOf
-  public int indexOf(int value) {
+  public int indexOf(final int value) {
     int index = 0;
     Node current = first;
     while (current != null) {
@@ -164,7 +170,7 @@ public class LinkedList {
     first = previous;
   }
 
-  public int findKthFromTheEnd(int k) throws Exception {
+  public int findKthFromTheEnd(final int k) throws Exception {
     if (isEmpty()) throw new Exception("List is empty");
     //This is if we know the size of our linked list (k > indexSize)
     if (k < 0) 
@@ -185,10 +191,10 @@ public class LinkedList {
   }
 
   public int[] findMiddleNode() {
-    int[] a = new int[2];
+    final int[] a = new int[2];
     if (isEmpty()) return a;
         
-    Node previous = first, current = first;//, next = first.next.next;
+    Node previous = first, current = first;
     
     while (current != last && current.next != last) {
       previous = previous.next;
@@ -201,17 +207,8 @@ public class LinkedList {
       a[0] = previous.value;
       a[1] = previous.next.value;
     }
-    return a;
-    // while (next != null) {
-    //   previous = previous.next;
-    //   current = next;
-    //   if(current.next == null) {
-    //     return previous.value;
-    //   }
-    //   next = next.next.next;
-    // }
 
-    //return previous.value + previous.next.value;
+    return a;
   }
 
   public Boolean hasLoop() {

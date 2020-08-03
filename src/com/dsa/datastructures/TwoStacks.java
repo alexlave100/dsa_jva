@@ -1,69 +1,66 @@
 package com.dsa.datastructures;
 
+import java.util.Arrays;
+
 public class TwoStacks {
-  private int[] twoStack;
-  int size;
-  int currentStack1_Size;
-  int currentStack2_Size; 
-  
-  public TwoStacks() {
-    this.twoStack = new int[10];
-    currentStack1_Size = 0;
-    currentStack2_Size = 10/2;
-  }
-  public TwoStacks (int size) {
-    if(size%2 != 0) 
-      size++;
-    this.size = size;
-    this.twoStack = new int[this.size];
-    currentStack1_Size = 0;
-    currentStack2_Size = this.size/2;
+  private int top1;
+  private int top2;
+  private int[] items;
+
+  public TwoStacks(int capacity) {
+    if (capacity <= 0)
+      throw new IllegalArgumentException("capacity must be 1 or greater.");
+
+    items = new int[capacity];
+    top1 = -1;
+    top2 = capacity;
   }
 
   public void push1(int item) {
-    if (currentStack1_Size == size/2)
-      throw new StackOverflowError("STACKOVERFLOW1");
-    twoStack[currentStack1_Size++] = item;
-  }
+    if (isFull1())
+      throw new IllegalStateException();
 
-  public void push2(int item) {
-    if (currentStack2_Size == size)
-      throw new StackOverflowError("STACKOVERFLOW2");
-    twoStack[currentStack2_Size++] = item;
+    items[++top1] = item;
   }
 
   public int pop1() {
     if (isEmpty1())
-      throw new IllegalStateException("EMPTY1");
-    return twoStack[--currentStack1_Size];
+      throw new IllegalStateException();
+
+    return items[top1--];
+  }
+
+  public boolean isEmpty1() {
+    return top1 == -1;
+  }
+
+  public boolean isFull1() {
+    return top1 + 1 == top2;
+  }
+
+  public void push2(int item) {
+    if (isFull2())
+      throw new IllegalStateException();
+
+    items[--top2] = item;
   }
 
   public int pop2() {
     if (isEmpty2())
-      throw new IllegalStateException("EMPTY2");
-    return twoStack[--currentStack2_Size];
-  }
+      throw new IllegalStateException();
 
-  public boolean isFull1() {
-    return currentStack1_Size == size/2;
-  }
-
-  public boolean isFull2() {
-    return currentStack2_Size == size;
-  }
-
-  public void printIt() {
-    for (int i = 0; i < currentStack1_Size; i++)
-      System.out.println(twoStack[i]);
-    for (int i = size/2; i < currentStack2_Size; i++)
-      System.out.println(twoStack[i]);
-  }
-
-  public boolean isEmpty1() {
-    return currentStack1_Size == 0;
+    return items[top2++];
   }
 
   public boolean isEmpty2() {
-    return currentStack2_Size == this.size/2;
+    return top2 == items.length;
+  }
+  public boolean isFull2() {
+    return top2 - 1 == top1;
+  }
+
+  @Override
+  public String toString() {
+    return Arrays.toString(items);
   }
 }

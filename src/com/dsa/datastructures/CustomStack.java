@@ -32,7 +32,7 @@ public class CustomStack {
     if (s.isEmpty())
       throw new IllegalArgumentException("Empty string");
 
-    for (Character c : s.toCharArray()) {
+    for (Character c : s.toCharArray()) {   
       if (left.contains(c))
         stack.push(c);
       if (right.contains(c)) {
