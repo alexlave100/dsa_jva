@@ -9,8 +9,6 @@ public class ArrayQueue {
   public ArrayQueue(int qSize) {
     this.arrayQ = new int[qSize];
     this.length = arrayQ.length;
-
-    System.out.println("First = " + first + " Last = " + last + " Counter = " + counter);
   }
 
   public void enqueue(int value) {
@@ -30,6 +28,19 @@ public class ArrayQueue {
     first = (first + 1) % length;
     counter--;
     return arrayQ[(first-1)%length];
+  }
+
+  // O(n/2)
+  public void reverseFirstKElements(int k) {
+    if(isEmpty() || k > counter || k < 0)
+      throw new IllegalStateException();
+
+    int placeHolder, j = 0;
+    for(int i = k - 1; i >= j; i--) {
+      placeHolder = arrayQ[j];
+      arrayQ[j++] = arrayQ[i];
+      arrayQ[i] = placeHolder;
+    }
   }
 
   public int peek() {
