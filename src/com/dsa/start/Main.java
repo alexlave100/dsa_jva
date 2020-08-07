@@ -37,7 +37,7 @@ public class Main {
 
      RunLengthEncoding rle = new RunLengthEncoding();
 
-     System.out.println(rle.encode("aaabbbcccdd"));
+     System.out.println(rle.encode("abcnnnnnnnnnnbbbreee"));
      
     }
 }

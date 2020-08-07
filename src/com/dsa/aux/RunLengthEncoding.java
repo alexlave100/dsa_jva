@@ -5,22 +5,72 @@ public class RunLengthEncoding {
     if(input == null || input.length() == 0)
       throw new IllegalArgumentException();
 
-    int counter = 0;
-    char prevChar = 0;
+    char prevCharStart = 0, prevCharEnd = 1;
     char[] charInput = input.toCharArray();
-    StringBuilder sb = new StringBuilder();
-    //         p1p2
-    // a  a  a  a  a  a b  b  c
-    for(char c : charInput) {
-      if(c == prevChar) {
-        counter++;
-      }else if(prevChar != 0) {
-        sb.append(counter).append(prevChar);
-        counter = 1;
-      }else counter = 1;
-      prevChar = c; 
+    StringBuilder sbStart = new StringBuilder(), sbEnd = new StringBuilder();
+    int startCount = 0, endCount = 0, i = 0, j = (charInput.length)-1;
+
+    while(i <= j) { 
+      if(charInput[i] == prevCharStart) {
+        startCount++;
+      } else if(prevCharStart != 0) {
+        sbStart.append(startCount)
+               .append(prevCharStart);
+        startCount = 1;
+      } else startCount = 1;
+      
+      if(charInput[j] == prevCharEnd) {
+        endCount++;
+      } else if(prevCharEnd != 1) {
+          sbEnd.insert(0, prevCharEnd)
+               .insert(0, endCount);
+          endCount = 1;
+      } else endCount = 1;
+
+      prevCharStart = charInput[i++];
+      prevCharEnd   = charInput[j--];
     }
-    sb.append(counter).append(prevChar); //1c
-    return sb.toString();
+
+    if(charInput.length % 2 == 0) {
+      if(prevCharStart == prevCharEnd) {
+        sbStart.append(startCount+endCount)
+               .append(prevCharStart);
+      } else {
+          sbStart.append(startCount)
+                 .append(prevCharStart);
+          sbEnd.insert(0, prevCharEnd)
+               .insert(0, endCount);
+        } // a b c c r
+    } else if(startCount != 1 || endCount != 1) {
+        if(startCount != 1 && endCount != 1) {
+          sbStart.append(startCount+endCount-1)
+                 .append(prevCharStart);
+        } else if(startCount != 1) {
+            sbStart.append(startCount)
+                   .append(prevCharStart);
+        } else {
+          sbStart.append(endCount)
+                 .append(prevCharEnd);
+        }
+    } else sbStart.append(1)
+                  .append(charInput[i-1]);
+
+    
+    return sbStart.append(sbEnd).toString();
+
+
+    // Loop from front
+
+    // for(char c : charInput) {
+    //   if(c == prevCharStart) {
+    //     startCount++;
+    //   }else if(prevCharStart != 0) {
+    //     sbStart.append(startCount).append(prevCharStart);
+    //     startCount = 1;
+    //   }else startCount = 1;
+    //   prevCharStart = c; 
+    // }
+    // sbStart.append(startCount).append(prevCharStart); //1c
+    // return sbStart.toString();
   }
 }
