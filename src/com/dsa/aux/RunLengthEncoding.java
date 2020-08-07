@@ -30,6 +30,7 @@ public class RunLengthEncoding {
       prevCharStart = charInput[i++];
       prevCharEnd   = charInput[j--];
     }
+    System.out.println("Iterations = " + i);
 
     if(charInput.length % 2 == 0) {
       if(prevCharStart == prevCharEnd) {
