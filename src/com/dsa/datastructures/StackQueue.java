@@ -33,7 +33,6 @@ public class StackQueue {
     return s2.peek();
   }
 
-
   private void moveBetweenStacks(Stack<Integer> source, Stack<Integer> destination) {
     while(!source.empty())
       destination.push(source.pop());    

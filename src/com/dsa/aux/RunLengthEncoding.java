@@ -61,7 +61,7 @@ public class RunLengthEncoding {
 
 
     // Loop from front
-
+    //   int k = 0 ;
     // for(char c : charInput) {
     //   if(c == prevCharStart) {
     //     startCount++;
@@ -70,8 +70,11 @@ public class RunLengthEncoding {
     //     startCount = 1;
     //   }else startCount = 1;
     //   prevCharStart = c; 
+    //   k++;
     // }
     // sbStart.append(startCount).append(prevCharStart); //1c
+
+    // System.out.println("Iterations = " + k);
     // return sbStart.toString();
   }
 }
