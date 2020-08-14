@@ -1,5 +1,6 @@
 package com.dsa.start;
 
+import com.dsa.aux.NearestSum;
 import com.dsa.aux.QueueOps;
 import com.dsa.aux.RecursiveStaircase;
 import com.dsa.aux.RunLengthEncoding;
@@ -53,35 +54,40 @@ public class Main {
 //         7
 //      4     9
 //    1   6 8  10
-      BST bst = new BST();
-      // bst.insert(7);
-      // bst.insert(4);
-      // bst.insert(9);
-      // bst.insert(1);
-      // bst.insert(6);
-      // bst.insert(8);
-      // bst.insert(10);
-      // bst.insert(12);
-      BST bst2 = new BST();
-      bst2.insert(7);
-      bst2.insert(4);
-      bst2.insert(8);
-      bst2.insert(1);
-      bst2.insert(6);
-      bst2.insert(8);
-      bst2.insert(10);
-      //System.out.println(bst.find(5));
-      //System.out.println(bst.minValue());
-      //  var arrList = bst.nodesAtKDistance(3);
-      //  System.out.println(arrList);
-      var size = bst.size();
-      System.out.println("Size = " + size);
-      bst.preOrderTraversal();
-      System.out.println();
-      System.out.println(bst.contains(11));
-      bst.remove(10);
-      bst.preOrderTraversal();
-      System.out.println();
+      // BST bst = new BST();
+      // // bst.insert(7);
+      // // bst.insert(4);
+      // // bst.insert(9);
+      // // bst.insert(1);
+      // // bst.insert(6);
+      // // bst.insert(8);
+      // // bst.insert(10);
+      // // bst.insert(12);
+      // BST bst2 = new BST();
+      // bst2.insert(7);
+      // bst2.insert(4);
+      // bst2.insert(8);
+      // bst2.insert(1);
+      // bst2.insert(6);
+      // bst2.insert(8);
+      // bst2.insert(10);
+      // //System.out.println(bst.find(5));
+      // //System.out.println(bst.minValue());
+      // //  var arrList = bst.nodesAtKDistance(3);
+      // //  System.out.println(arrList);
+      // var size = bst.size();
+      // System.out.println("Size = " + size);
+      // bst.preOrderTraversal();
+      // System.out.println();
+      // System.out.println(bst.contains(11));
+      // bst.remove(10);
+      // bst.preOrderTraversal();
+      // System.out.println();
+      int[] b1 = {7, 4, 1, 10};
+      int[] b2 = {4, 5, 8, 7};
+      int bTarget = 13;
 
+      var v = NearestSum.closestSumPair(b1, b2, bTarget);
+      System.out.println(v);
     }
 }
