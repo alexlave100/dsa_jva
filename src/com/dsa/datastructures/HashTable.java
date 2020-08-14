@@ -14,7 +14,7 @@ public class HashTable {
       map.put(c, value + 1);
     }
     for (char c : chars) {
-      if(map.get(c) == 1) 
+      if(map.get(c) == 1)
         return c;
     }
 
